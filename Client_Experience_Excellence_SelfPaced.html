@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client Experience Excellence | Self-paced course</title><style>
+:root{
+  --navy:#243748; --ink:#1B1A23; --blue:#2683C6; --teal:#3394BA; --aqua:#57B6C0; --sage:#76BDA7; --coral:#E4572E; --gold:#F2B134;
+  --bg:#FFFFFF; --surface:#EEF4F8; --surface2:#E3F1F6; --text:#1B1A23; --muted:#5B6775; --line:#D5DEE6;
+  --side:#243748; --sideText:#FFFFFF; --sideMuted:#B8C7D3; --good:#2F8A6E; --goodBg:#E6F3EE; --badBg:#FCE9E3; --warnBg:#FDF3DD;
+  --accentText:#1F6F8F;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#141C24; --surface:#1E2A36; --surface2:#22323F; --text:#E8EEF3; --muted:#A9B6C2; --line:#33475A;
+    --side:#0F161D; --sideText:#E8EEF3; --sideMuted:#8FA3B4; --good:#7FD1B3; --goodBg:#183329; --badBg:#3A2019; --warnBg:#3A3018;
+    --accentText:#7CCBE0;
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:Calibri,"Segoe UI",Carlito,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text);font-size:17px;line-height:1.55}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.app{display:grid;grid-template-columns:290px 1fr;min-height:100vh}
+aside{background:var(--side);color:var(--sideText);padding:28px 20px;position:sticky;top:0;height:100vh;overflow:auto}
+aside .course{font-size:14px;color:var(--sideMuted);margin:0 0 4px}
+aside h1{font-size:22px;line-height:1.2;margin:0 0 18px}
+.prog{height:8px;background:rgba(255,255,255,.15);border-radius:4px;overflow:hidden;margin-bottom:6px}
+.prog i{display:block;height:100%;width:0;background:var(--aqua);transition:width .4s}
+.progLabel{font-size:13px;color:var(--sideMuted);margin-bottom:20px}
+nav ol{list-style:none;padding:0;margin:0}
+nav li button{width:100%;text-align:left;background:none;border:0;color:var(--sideText);padding:10px 10px;border-radius:8px;display:flex;gap:12px;align-items:flex-start}
+nav li button:hover{background:rgba(255,255,255,.07)}
+nav li button[aria-current="true"]{background:rgba(87,182,192,.22)}
+nav .dot{flex:0 0 26px;height:26px;border-radius:50%;border:2px solid var(--sideMuted);display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--sideMuted)}
+nav .done .dot{background:var(--sage);border-color:var(--sage);color:#123}
+nav .t{font-size:15px;line-height:1.3}
+nav .m{display:block;font-size:12px;color:var(--sideMuted)}
+.menuBtn{display:none}
+main{padding:44px clamp(20px,5vw,72px) 80px;max-width:1040px}
+.mod{display:none}
+.mod.active{display:block}
+.kicker{color:var(--accentText);font-weight:700;font-size:15px;margin:0 0 6px}
+h2{font-size:clamp(30px,4vw,42px);line-height:1.12;margin:0 0 10px;color:var(--text)}
+h3{font-size:23px;margin:36px 0 10px}
+h4{font-size:18px;margin:0 0 6px}
+p.lead{font-size:19px;color:var(--muted);max-width:68ch;margin:0 0 26px}
+p{max-width:72ch}
+.panel{background:var(--surface);border-radius:14px;padding:22px 24px;margin:16px 0}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.grid > .panel{margin:0}
+.btn{background:var(--teal);color:#fff;border:0;border-radius:999px;padding:11px 24px;font-weight:700}
+.btn:hover{background:var(--blue)}
+.btn.ghost{background:transparent;color:var(--accentText);border:2px solid var(--teal)}
+.btn.next{background:var(--navy)}
+@media (prefers-color-scheme: dark){.btn.next{background:var(--teal)}}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line);flex-wrap:wrap}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.tag{display:inline-block;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--surface2);color:var(--accentText)}
+
+/* Hero: incoming escalation email */
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:34px;align-items:center;margin-bottom:34px}
+.mail{background:var(--bg);border:1px solid var(--line);border-radius:14px;box-shadow:0 14px 40px rgba(36,55,72,.18);overflow:hidden;transform:rotate(-1.5deg)}
+.mail .bar{background:var(--navy);color:#fff;padding:10px 16px;font-size:14px;display:flex;justify-content:space-between}
+.mail .body{padding:18px 20px}
+.mail .from{font-size:14px;color:var(--muted)}
+.mail .subj{font-weight:700;font-size:18px;margin:6px 0 10px}
+.mail .flag{color:var(--coral);font-weight:700}
+.unread{width:10px;height:10px;border-radius:50%;background:var(--coral);display:inline-block;margin-right:8px;animation:pulse 1.6s ease-in-out 3}
+@keyframes pulse{50%{transform:scale(1.7);opacity:.5}}
+@media (prefers-reduced-motion: reduce){.unread{animation:none}.prog i{transition:none}}
+.path{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:12px 0}
+.path div{border-left:0;background:var(--surface);border-radius:12px;padding:16px}
+.path b{display:block;font-size:24px;color:var(--accentText)}
+
+/* Quiz-style options */
+.q{margin:0 0 22px}
+.q .stem{font-weight:700;margin-bottom:10px}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:11px 14px;color:var(--text)}
+.opt:hover{border-color:var(--aqua)}
+.opt[aria-pressed="true"]{border-color:var(--teal);background:var(--surface2)}
+.opt.correct{border-color:var(--good);background:var(--goodBg)}
+.opt.wrong{border-color:var(--coral);background:var(--badBg)}
+.fb{margin-top:10px;padding:12px 14px;border-radius:10px;display:none}
+.fb.show{display:block}
+.fb.good{background:var(--goodBg)}
+.fb.bad{background:var(--badBg)}
+.fb.info{background:var(--warnBg)}
+.counter{font-size:14px;color:var(--muted);margin-bottom:8px}
+
+/* Style results */
+.bars{display:grid;gap:10px;margin:14px 0}
+.barRow{display:grid;grid-template-columns:110px 1fr 30px;gap:10px;align-items:center;font-weight:700}
+.barTrack{height:16px;background:var(--surface2);border-radius:8px;overflow:hidden}
+.barTrack i{display:block;height:100%;border-radius:8px}
+.styleCard{border-radius:14px;padding:22px;color:#fff}
+.styleCard h4{font-size:26px;margin:0}
+.styleCard p{margin:6px 0}
+
+/* Levels */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tabs button{border:2px solid var(--line);background:var(--bg);color:var(--text);border-radius:999px;padding:8px 16px;font-weight:700}
+.tabs button[aria-selected="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+@media (prefers-color-scheme: dark){.tabs button[aria-selected="true"]{background:var(--teal);border-color:var(--teal)}}
+.lvl{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-items:end;margin:10px 0 6px}
+.lvl div{border-radius:10px 10px 4px 4px;color:#fff;padding:10px 12px;font-weight:700;font-size:15px}
+
+/* Iceberg reveal */
+.ice{position:relative;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,var(--bg) 0 34%,#1F5F7A 34% 100%)}
+@media (prefers-color-scheme: dark){.ice{background:linear-gradient(180deg,var(--surface) 0 34%,#123848 34% 100%)}}
+.ice .tip{padding:20px 24px;min-height:120px}
+.ice .under{padding:20px 24px;color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{padding:8px 14px;border-radius:999px;font-weight:700;font-size:15px}
+.ice .tip .chip{background:var(--surface2);color:var(--text)}
+.ice .under .chip{background:rgba(255,255,255,.14);color:#fff;border:1px dashed rgba(255,255,255,.5)}
+.ice .under .chip.hidden{color:transparent;user-select:none}
+
+/* Sorter */
+.sortRow{display:grid;grid-template-columns:1fr 150px 28px;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+select,input[type=text],textarea{font:inherit;background:var(--bg);color:var(--text);border:2px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}
+textarea{min-height:76px;resize:vertical}
+label{font-weight:700;display:block;margin:12px 0 4px}
+
+/* STEER */
+.steer{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.steer button{border:0;border-radius:14px;padding:16px 8px;color:#fff;font-weight:700}
+.steer button b{display:block;font-size:40px;line-height:1}
+.steer button[aria-pressed="true"]{outline:4px solid var(--gold);outline-offset:2px}
+.steerDetail{min-height:150px}
+
+/* Branching */
+.lobs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.lobs button{background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:14px;color:var(--text);text-align:left;font-weight:700}
+.lobs button:hover{border-color:var(--teal)}
+.scene{border-radius:14px;padding:22px 24px;background:var(--navy);color:#fff}
+@media (prefers-color-scheme: dark){.scene{background:#1A3346}}
+.scene .clock{font-size:14px;color:#B8C7D3;margin-bottom:4px}
+.steps{display:flex;gap:6px;margin:12px 0}
+.steps i{height:6px;flex:1;border-radius:3px;background:var(--line)}
+.steps i.on{background:var(--teal)}
+
+/* Region flip cards */
+.flip{background:none;border:0;padding:0;perspective:1000px;height:250px;text-align:left;color:inherit}
+.flip .inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flip[aria-pressed="true"] .inner{transform:rotateY(180deg)}
+.flip .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:18px;display:flex;flex-direction:column}
+.flip .front{background:var(--surface)}
+.flip .back{color:#fff;transform:rotateY(180deg)}
+.flip .code{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;margin-bottom:10px}
+.flip .hint{margin-top:auto;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){.flip .inner{transition:none}}
+.tz{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center}
+.tz div{background:var(--surface);border-radius:12px;padding:14px}
+.tz b{display:block;font-size:26px}
+.tz .night{background:#1D2B38;color:#E8EEF3}
+
+/* Builder */
+.preview{background:var(--bg);border:2px dashed var(--teal);border-radius:12px;padding:18px;font-size:18px;white-space:pre-wrap}
+.swap{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  aside{position:relative;height:auto;padding:16px 18px}
+  aside nav{display:none}
+  aside.open nav{display:block}
+  .menuBtn{display:inline-block;background:transparent;color:#fff;border:2px solid var(--aqua);border-radius:999px;padding:6px 14px;margin-bottom:10px}
+  .hero,.g2,.g3,.g4,.path,.lobs,.swap{grid-template-columns:1fr}
+  .steer,.lvl,.tz{grid-template-columns:repeat(2,1fr)}
+  .mail{transform:none}
+  .sortRow{grid-template-columns:1fr}
+}
+
+.grid > .panel{margin:0}
+.scale{display:grid;grid-template-columns:1fr repeat(5,44px);gap:6px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.scale .lab{font-size:16px}
+.scale button{height:40px;border-radius:8px;border:2px solid var(--line);background:var(--bg);color:var(--text);font-weight:700}
+.scale button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.scaleHead{display:grid;grid-template-columns:1fr repeat(5,44px);gap:6px;font-size:12px;color:var(--muted);text-align:center}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.three .panel{margin:0}
+.three b.big{display:block;font-size:20px;margin-bottom:4px}
+.newfact{border-left:0;background:var(--warnBg);border-radius:10px;padding:12px 14px;margin:12px 0;display:none}
+.newfact.show{display:block}
+.vague{background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:16px 18px;font-style:italic;font-size:18px}
+.checks{display:grid;gap:8px;margin:12px 0}
+.checks label{font-weight:400;display:flex;gap:10px;align-items:flex-start;margin:0;background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer}
+.checks input{margin-top:5px;width:18px;height:18px;flex:0 0 18px}
+.checks label.correct{border-color:var(--good);background:var(--goodBg)}
+.checks label.wrong{border-color:var(--coral);background:var(--badBg)}
+.checks label.missed{border-style:dashed;border-color:var(--good)}
+.why{display:grid;gap:8px}
+.why .w{display:none;background:var(--surface);border-radius:10px;padding:12px 14px}
+.why .w.show{display:block}
+.why .w b{color:var(--accentText)}
+.why .w.root{background:var(--goodBg)}
+.logt{width:100%;border-collapse:collapse;font-size:15px;margin:10px 0}
+.logt th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px}
+.logt td{padding:8px 10px;border-bottom:1px solid var(--line)}
+.logt tr:nth-child(even) td{background:var(--surface)}
+.toolkit .tool{background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:20px 22px;margin:16px 0;break-inside:avoid}
+.toolkit .tool h4{font-size:20px;color:var(--accentText)}
+.toolkit ul{margin:6px 0 0;padding-left:20px}
+.toolkit li{margin:3px 0}
+.tool table{width:100%;border-collapse:collapse;font-size:15px}
+.tool td{border:1px solid var(--line);padding:8px 10px;vertical-align:top}
+.tool td:first-child{font-weight:700;width:34%}
+.compare{display:grid;grid-template-columns:1fr 70px 70px;gap:6px;align-items:center;font-size:15px;padding:6px 0;border-bottom:1px solid var(--line)}
+.compare b{text-align:center}
+.pass{font-size:22px;font-weight:700}
+@media print{
+  aside,.foot,.noprint,.btn{display:none!important}
+  .app{display:block}
+  body{background:#fff;color:#000}
+  .mod{display:none!important}
+  body.p-plan #mPlan, body.p-tools #mTools{display:block!important}
+  body.p-plan #mPlan .noprintsec{display:none!important}
+  textarea,input{border:1px solid #999}
+  .toolkit .tool{border:1px solid #999}
+}
+@media (max-width:900px){.three{grid-template-columns:1fr}.scale,.scaleHead{grid-template-columns:1fr repeat(5,36px)}}
+
+nav .partHead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--aqua);margin:16px 10px 4px}
+.resume{display:none;background:var(--warnBg);border-radius:14px;padding:18px 22px;margin-bottom:24px}
+.resume.show{display:block}
+.qbox{background:var(--navy);color:#fff;border-radius:14px;padding:18px 22px;margin:0 0 24px;font-size:19px}
+@media (prefers-color-scheme: dark){.qbox{background:#1A3346}}
+.qbox b{color:var(--gold)}
+.avoid{display:grid;grid-template-columns:1fr 40px 1fr;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:16px}
+.avoid span:first-child{color:var(--muted)}
+.avoid i{font-style:normal;text-align:center;color:var(--coral);font-weight:700}
+.health{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+.metric{background:var(--surface);border-radius:12px;padding:14px;border-top:6px solid var(--sage)}
+.metric b{display:block;font-size:24px}
+.metric span{font-size:14px;color:var(--muted)}
+.exec{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.exec .panel{margin:0}
+.exec blockquote{margin:8px 0;padding:10px 14px;border-left:4px solid var(--teal);background:var(--bg);border-radius:6px;font-style:italic;font-size:15px}
+.exec select{margin-top:8px}
+.matrix{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0}
+.matrix th{background:var(--navy);color:#fff;padding:8px;text-align:left}
+.matrix td{border:1px solid var(--line);padding:8px;vertical-align:top}
+.matrix td.me{font-weight:700;background:var(--surface)}
+.matrix tr.mine td{background:var(--warnBg)}
+.coach{display:grid;grid-template-columns:110px 1fr 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px;align-items:start}
+.coach b{color:var(--accentText)}
+.ladder{display:grid;gap:6px;margin:12px 0}
+.ladder div{border-radius:10px;padding:10px 14px;color:#fff;font-weight:700;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.ladder small{font-weight:400;opacity:.95}
+.rel{width:100%;border-collapse:collapse;font-size:15px}
+.rel th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px}
+.rel td{padding:8px 10px;border-bottom:1px solid var(--line)}
+.str{display:inline-block;padding:2px 10px;border-radius:999px;font-size:13px;font-weight:700}
+.s-strong{background:var(--goodBg);color:var(--good)}
+.s-weak{background:var(--warnBg);color:#8A5A00}
+.s-none{background:var(--badBg);color:var(--coral)}
+@media (prefers-color-scheme: dark){.s-weak{color:var(--gold)}}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ba .panel{margin:0}
+.loop{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;counter-reset:l}
+.loop div{background:var(--surface);border-radius:12px;padding:14px;position:relative}
+.loop div::before{counter-increment:l;content:counter(l);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;margin-bottom:8px}
+@media (max-width:900px){.health,.exec,.ba,.loop{grid-template-columns:1fr}.avoid{grid-template-columns:1fr}.avoid i{display:none}.coach{grid-template-columns:1fr}}
+@media print{ body.p-plan #mPlan, body.p-tools #mTools{display:block!important} }
+</style></head>
+<body>
+<div class="app">
+<aside id="side">
+  <p class="course">Senior Leadership Programme | Leadership Foundations</p>
+  <h1>Client Experience Excellence</h1>
+  <div class="prog" aria-hidden="true"><i id="progBar"></i></div>
+  <div class="progLabel" id="progLabel"></div>
+  <button class="menuBtn" id="menuBtn" aria-expanded="false">Course menu</button>
+  <nav aria-label="Course sections"><ol id="navList"></ol></nav>
+</aside>
+<main id="main" tabindex="-1">
+
+<!-- ============ 1 WELCOME ============ -->
+<section class="mod" id="mWelcome" data-part="Part 1: Know yourself and your client" data-title="Welcome" data-time="5 min">
+  <div class="resume" id="resumeBox" role="region" aria-label="Resume course">
+    <h4>Welcome back</h4>
+    <p style="margin:4px 0 12px" id="resumeText">You can pick up where you left off.</p>
+    <button class="btn" id="resumeBtn">Resume where I left off</button> <button class="btn ghost" id="restartBtn">Start over</button>
+  </div>
+  <div class="hero">
+    <div>
+      <p class="kicker">Self-paced course | about 2 hours | 3 parts of about 40 minutes</p>
+      <h2>From service delivery to strategic partnership</h2>
+      <p class="lead">For VPs, Center Heads and Directors across the US, India, the Philippines and Sri Lanka. Your AMs and Managers have completed CX360. This course is about what only senior leaders can do: own the client experience across a portfolio, and make what your managers learned stick.</p>
+    </div>
+    <div class="mail" role="img" aria-label="Account dashboard showing all green metrics and a note about the client">
+      <div class="bar"><span>Meridian account | monthly dashboard</span><span>All SLAs met</span></div>
+      <div class="body">
+        <div class="from"><span class="unread"></span>Note from your Account Manager</div>
+        <div class="subj">Everything's green. So why am I worried?</div>
+        <p style="margin:0">"The new COO hasn't taken our call. Only two of their leaders came to the last QBR. And I've heard they've invited another vendor to an 'innovation day'."</p>
+      </div>
+    </div>
+  </div>
+  <div class="qbox"><b>Leadership question:</b> Are we delivering what the client needs to achieve, or only what our contract requires?</div>
+
+  <h3>The Meridian account</h3>
+  <p>Meridian is a large client served by three of our towers: Customer Service, AR/Collections and Coding. Every SLA has been green for six months. But their long-standing sponsor has left, a new COO arrived six weeks ago, and renewal is five months away. You'll follow Meridian through this course. At key moments, you can switch to the line of business closest to yours.</p>
+
+  <h3>Quick pulse: your own account</h3>
+  <p>Think of one important account you're responsible for.</p>
+  <div class="grid g2">
+    <div><label for="pulseAcct">Account name (only you can see this)</label><input type="text" id="pulseAcct" data-save></div>
+    <div><label>If renewal were today, how confident are you they'd renew?</label>
+      <div class="scale" style="grid-template-columns:repeat(5,44px);border:0" id="pulse" role="group" aria-label="Renewal confidence from 1 to 5"></div>
+      <p class="small muted" style="margin:4px 0 0">1 = not confident, 5 = very confident</p></div>
+  </div>
+
+  <h3>What makes this senior-level</h3>
+  <div class="panel" id="avoidList"></div>
+
+  <h3>How the course works</h3>
+  <div class="path">
+    <div><b>Part 1</b>Know yourself and your client: your style, your client's style, and the language your managers now speak.</div>
+    <div><b>Part 2</b>Diagnose and decide: client health beyond the dashboard, your portfolio, relationship mapping and tough trade-offs.</div>
+    <div><b>Part 3</b>Lead the partnership: the value story, one accountable partner, culture at scale, and your account strategy.</div>
+  </div>
+  <p class="muted small">Examples span all our lines of business. Your progress is saved on this device only, so you can come back to it later; nothing is sent or tracked. Saving may not work in some browsers or preview windows.</p>
+  <div class="foot"><span class="muted small">Next: your Client Leadership Style</span><button class="btn next" data-next>Start the course</button></div>
+</section>
+
+<!-- ============ 2 ADRV ============ -->
+<section class="mod" id="mStyle" data-part="Part 1: Know yourself and your client" data-title="Your Client Leadership Style" data-time="10 min">
+  <p class="kicker">Section 2</p>
+  <h2>Your Client Leadership Style</h2>
+  <p class="lead">Twelve situations. These use the same four styles your managers met in CX360 Module 2: Advisor, Connector, Achiever and Strategist. Every option is a reasonable choice for a senior leader, so there's no right answer. Pick what you would most likely do first.</p>
+  <div id="profileWrap" class="panel"></div>
+  <div id="profileResult" hidden></div>
+  <div class="foot"><button class="btn ghost" data-prev>Back</button><button class="btn next" data-next>Continue</button></div>
+</section>
+
+<!-- ============ 3 SPOTTER ============ -->
+<section class="mod" id="mSpot" data-part="Part 1: Know yourself and your client" data-title="Client Style Spotter" data-time="12 min">
+  <p class="kicker">Section 3</p>
+  <h2>Client Style Spotter</h2>
+  <p class="lead">Your style is only half the picture. Clients have styles too: Analytical, Relational, Driver and Visionary. Senior leaders work with several client executives at once, and reading them quickly is the skill.</p>
+  <h3>Meet four Meridian executives</h3>
+  <p>Read the cues, then choose each executive's style.</p>
+  <div class="exec" id="execs"></div>
+  <button class="btn" id="spotCheck" style="margin-top:16px">Check my answers</button>
+  <div class="fb" id="spotFb"></div>
+
+  <h3>The flex matrix</h3>
+  <p id="flexIntro">Find your style (row) and your client's style (column) to see one adjustment that makes the biggest difference.</p>
+  <div style="overflow-x:auto"><table class="matrix" id="flexTable"></table></div>
+
+  <h3>Try it: the quiet COO</h3>
+  <p>Mark Ellison, Meridian's new COO, hasn't replied to two meeting requests. Which opening message is most likely to get a reply from a Driver?</p>
+  <div id="cooQ"></div>
+  <div class="foot"><button class="btn ghost" data-prev>Back</button><button class="btn next" data-next>Continue</button></div>
+</section>
+
+<!-- ============ 4 CX360 LANGUAGE ============ -->
+<section class="mod" id="mLang" data-part="Part 1: Know yourself and your client" data-title="The language your managers speak" data-time="8 min">
+  <p class="kicker">Section 4</p>
+  <h2>The language your managers now speak</h2>
+  <p class="lead">Your AMs and Managers learned these frameworks in CX360. You don't need to teach them. You need to recognise them, ask for them and reinforce them, because what senior leaders ask about is what teams keep doing.</p>
+  <div class="panel" id="coachList"></div>
+  <h3>Quick check: which framework is this manager using?</h3>
+  <div id="matchQs"></div>
+  <div class="foot"><button class="btn ghost" data-prev>Back</button><button class="btn next" data-next>Continue to Part 2</button></div>
+</section>
+
+<!-- ============ 5 HEALTH ============ -->
+<section class="mod" id="mHealth" data-part="Part 2: Diagnose and decide" data-title="Client health beyond the dashboard" data-time="12 min">
+  <p class="kicker">Part 2 | Section 5</p>
+  <h2>Client health beyond the dashboard</h2>
+  <div class="qbox"><b>Leadership question:</b> What evidence tells us this relationship is healthy?</div>
+  <p class="lead">CX360 Module 3 called it the SLA trap: SLAs tell you what you did, not what the client experienced. At senior level, the risk is bigger. A portfolio can be green on every metric while a key relationship quietly weakens.</p>
+  <div class="grid g2">
+    <div class="panel"><h4>Lagging indicators</h4><p class="small" style="margin:0">Tell you what already happened: SLA, TAT, accuracy, CSAT, escalations raised. Essential, but by the time they move, the client may have made up their mind.</p></div>
+    <div class="panel"><h4>Leading indicators</h4><p class="small" style="margin:0">Warn you early: senior client engagement, sponsor changes, tone of emails, effort to get things done (CES), new requests, competitor contact. NPS often declines 6–9 months before a client leaves.</p></div>
+  </div>
+  <h3>Activity: read the Meridian health panel</h3>
+  <div class="health" id="healthPanel"></div>
+  <p>Which of these are warning signs? Select all that apply.</p>
+  <div class="checks" id="warnChecks"></div>
+  <button class="btn" id="warnCheck">Check</button>
+  <div class="fb" id="warnFb"></div>
+  <div class="foot"><button class="btn ghost" data-prev>Back</button><button class="btn next" data-next>Continue</button></div>
+</section>
+
+<!-- ============ 6 PORTFOLIO ============ -->
+<section class="mod" id="mPortfolio" data-part="Part 2: Diagnose and decide" data-title="From account to portfolio" data-time="8 min">
+  <p class="kicker">Section 6</p>
+  <h2>From account to portfolio</h2>
+  <p class="lead">Your managers use the Loyalty Ladder for one account. You need it across all of them, to decide where your own time makes the biggest difference. Moving one client up one rung is usually the highest-return thing a leader can do.</p>
+  <div class="ladder" id="ladder"></div>
+  <h3>Activity: place six accounts on the ladder</h3>
+  <div class="panel" id="ladderSort"></div>
+  <button class="btn" id="ladderCheck">Check</button>
+  <div class="fb" id="ladderFb"></div>
+  <div id="ladderQ"></div>
+  <div class="foot"><button class="btn ghost" data-prev>Back</button><button class="btn next" data-next>Continue</button></div>
+</section>
+
+<!-- ============ 7 MAP ============ -->
+<section class="mod" id="mMap" data-part="Part 2: Diagnose and decide" data-title="Executive relationship mapping" data-time="10 min">
+  <p class="kicker">Section 7</p>
+  <h2>Executive relationship mapping</h2>
+  <div class="qbox"><b>Leadership question:</b> Are we connected to the people who shape the client's strategic decisions?</div>
+  <h3>Six roles to map in every key account</h3>
+  <div class="grid g3">
+    <div class="panel"><h4>Sponsor</h4><p class="small" style="margin:0">Champions the partnership at the top. When they leave, the relationship is exposed.</p></div>
+    <div class="panel"><h4>Economic buyer</h4><p class="small" style="margin:0">Signs off budgets and renewals. Often not your day-to-day contact.</p></div>
+    <div class="panel"><h4>Influencers</h4><p class="small" style="margin:0">Shape the decision: finance, strategy, compliance, IT.</p></div>
+    <div class="panel"><h4>Champions</h4><p class="small" style="margin:0">Speak up for you when you're not in the room.</p></div>
+    <div class="panel"><h4>Detractors</h4><p class="small" style="margin:0">Sceptical or would prefer another vendor. Know who they are.</p></div>
+    <div class="panel"><h4>Operational contacts</h4><p class="small" style="margin:0">Work with your teams daily. Strong here doesn't mean strong at the top.</p></div>
+  </div>
+  <div class="panel" style="background:var(--warnBg)"><p style="margin:0"><b>The single-thread risk:</b> if your whole relationship runs through one person, you don't have a relationship with the client. You have a relationship with that person. Senior leaders build several threads at senior level.</p></div>
+
+  <h3>The Meridian relationship map</h3>
+  <div style="overflow-x:auto"><table class="rel" id="relTable"></table></div>
+  <p>Which two gaps are most urgent to close before renewal? Select two.</p>
+  <div class="checks" id="gapChecks"></div>
+  <button class="btn" id="gapCheck">Check</button>
+  <div class="fb" id="gapFb"></div>
+
+  <h3>What does the COO need from you?</h3>
+  <p>CX360 Module 2 introduced Jobs To Be Done: clients hire you to do a job, not just deliver a contract. At executive level, the emotional and social jobs often matter most.</p>
+  <div class="grid g3">
+    <div class="panel"><h4>Functional job</h4><p class="small" style="margin:0">Reduce operating cost and prove the outsourcing model is working.</p></div>
+    <div class="panel"><h4>Emotional job</h4><p class="small" style="margin:0">Feel in control of an inherited vendor he didn't choose.</p></div>
+    <div class="panel"><h4>Social job</h4><p class="small" style="margin:0">Be seen by his board as the leader who made the operation sharper.</p></div>
+  </div>
+  <div class="foot"><button class="btn ghost" data-prev>Back</button><button class="btn next" data-next>Continue</button></div>
+</section>
+
+<!-- ============ 8 DECIDE ============ -->
+<section class="mod" id="mDecide" data-part="Part 2: Diagnose and decide" data-title="Decisions under pressure" data-time="10 min">
+  <p class="kicker">Section 8</p>
+  <h2>Decisions under pressure</h2>
+  <p class="lead">At senior level, the hard part isn't knowing what good service looks like. It's choosing between things that all matter: the client relationship, commercial value, other clients and towers, and compliance. Three decisions on the Meridian account.</p>
+  <div id="decide"></div>
+  <div class="foot"><button class="btn ghost" data-prev>Back</button><button class="btn next" data-next>Continue to Part 3</button></div>
+</section>
+
+<!-- ============ 9 VALUE ============ -->
+<section class="mod" id="mValue" data-part="Part 3: Lead the partnership" data-title="The value story" data-time="12 min">
+  <p class="kicker">Part 3 | Section 9</p>
+  <h2>The value story</h2>
+  <div class="qbox"><b>Leadership question:</b> Why should the client keep choosing us as a strategic partner?</div>
+  <p class="lead">A vendor reports the work. A strategic partner explains what it means for the client's business and recommends what to do next. Your managers learned IMPACT in CX360 Module 3. At executive level, it becomes the backbone of every QBR and renewal conversation.</p>
+  <div class="grid g3" id="impactGrid"></div>
+
+  <h3>Before and after: pick your line of business</h3>
+  <div class="tabs" role="tablist" id="baTabs"></div>
+  <div class="ba" id="baPanel" aria-live="polite"></div>
+
+  <h3>Which of these are value statements?</h3>
+  <p>Select every statement that tells the client what the result means for them.</p>
+  <div class="checks" id="valChecks"></div>
+  <button class="btn" id="valCheck">Check</button>
+  <div class="fb" id="valFb"></div>
+
+  <h3>The executive QBR</h3>
+  <div class="grid g2">
+    <div class="panel"><h4>Pre-wire it</h4><p class="small" style="margin:0">Never surprise a senior stakeholder in the meeting. Share the headline with the sponsor and economic buyer beforehand, so the meeting confirms rather than debates.</p></div>
+    <div class="panel"><h4>Lead with BLUF</h4><p class="small" style="margin:0">Open with what matters to them: the outcome, the risk, the decision you need. Data supports the story; it isn't the story.</p></div>
+    <div class="panel"><h4>Look forward</h4><p class="small" style="margin:0">Spend at least a third of the time on their next 6–12 months and where you can help. That's what moves a client up the ladder.</p></div>
+    <div class="panel"><h4>Renewal isn't a report</h4><p class="small" style="margin:0">A renewal conversation starts 9–12 months out, with the value delivered, the relationship at senior level, and a credible view of what the next contract could achieve.</p></div>
+  </div>
+  <div class="foot"><button class="btn ghost" data-prev>Back</button><button class="btn next" data-next>Continue</button></div>
+</section>
+
+<!-- ============ 10 PARTNER ============ -->
+<section class="mod" id="mPartner" data-part="Part 3: Lead the partnership" data-title="One accountable partner" data-time="6 min">
+  <p class="kicker">Section 10</p>
+  <h2>One accountable partner</h2>
+  <div class="qbox"><b>Leadership question:</b> Does the client experience one accountable partner, or several disconnected teams?</div>
+  <p class="lead">Clients don't see towers, regions or shifts. They see one company. When three teams give three different answers, the client stops trusting all of them.</p>
+  <div class="scene"><p style="margin:0;font-size:19px">Meridian's COO asks why patient call wait times rose last week. Customer Service says AR/Collections changed a script without telling them. AR/Collections says Coding's backlog created extra calls. Coding says nobody told them about the volume spike. Each team has emailed the client separately.</p></div>
+  <div id="partnerQ" style="margin-top:16px"></div>
+  <div class="grid g3">
+    <div class="panel"><h4>One owner</h4><p class="small" style="margin:0">A named senior owner for each key client, with authority across towers.</p></div>
+    <div class="panel"><h4>One view of commitments</h4><p class="small" style="margin:0">A single, shared list of what's been promised to the client, by whom and by when.</p></div>
+    <div class="panel"><h4>Clear decision rights</h4><p class="small" style="margin:0">Agree in advance who decides when towers' priorities conflict.</p></div>
+  </div>
+  <p class="small muted">Escalations and cross-region handoffs are covered in depth in <b>Managing Escalations Like a Leader</b> (STEER and the handoff checklist) and <b>Global Cultural Alignment</b>.</p>
+  <div class="foot"><button class="btn ghost" data-prev>Back</button><button class="btn next" data-next>Continue</button></div>
+</section>
+
+<!-- ============ 11 CULTURE ============ -->
+<section class="mod" id="mCulture" data-part="Part 3: Lead the partnership" data-title="Culture and governance at scale" data-time="8 min">
+  <p class="kicker">Section 11</p>
+  <h2>Culture and governance at scale</h2>
+  <p class="lead">CX360 Module 3 gave your managers three levers: what you model, what you measure and what you recognise. At senior level, the same levers work across towers and regions, but they need structure.</p>
+  <h3>The voice-of-client loop</h3>
+  <div class="loop">
+    <div><h4>Listen</h4><p class="small" style="margin:0">Gather feedback from every level: surveys, QBRs, informal conversations, complaints, praise.</p></div>
+    <div><h4>Decide</h4><p class="small" style="margin:0">Choose the few themes worth acting on across the portfolio.</p></div>
+    <div><h4>Act</h4><p class="small" style="margin:0">Assign owners and dates. Fix causes, not just cases.</p></div>
+    <div><h4>Close the loop</h4><p class="small" style="margin:0">Tell the client what changed because of what they said. Most organisations skip this step.</p></div>
+  </div>
+  <h3>Senior leadership rituals</h3>
+  <div class="grid g2">
+    <div class="panel"><h4>Monthly CX review across towers</h4><p class="small" style="margin:0">Not an SLA review. "How does each key client feel, and what's changed?"</p></div>
+    <div class="panel"><h4>Top at-risk accounts</h4><p class="small" style="margin:0">A standing agenda item: the accounts where leading indicators are slipping, and who owns the recovery.</p></div>
+    <div class="panel"><h4>The empty chair</h4><p class="small" style="margin:0">In operational reviews, ask: "If the client were sitting here, what would they say about this decision?"</p></div>
+    <div class="panel"><h4>Recognise client moments</h4><p class="small" style="margin:0">Publicly recognise proactive updates and great recoveries, not just green metrics.</p></div>
+  </div>
+  <h3>Business measures to watch</h3>
+  <p>Renewal outlook and retention risk · relationship health trends (NPS, CES) · repeat escalations and time to recover · commitments delivered on time · corrective actions closed · client-requested improvements delivered.</p>
+  <div class="foot"><button class="btn ghost" data-prev>Back</button><button class="btn next" data-next>Continue</button></div>
+</section>
+
+<!-- ============ 12 AUDIT ============ -->
+<section class="mod" id="mAudit" data-part="Part 3: Lead the partnership" data-title="Portfolio Health Self-Audit" data-time="5 min">
+  <p class="kicker">Section 12</p>
+  <h2>Portfolio Health Self-Audit</h2>
+  <p class="lead">Rate your own accounts honestly from 1 (weak) to 5 (strong). This is for you only. Your lowest score is usually the best place to start.</p>
+  <div class="panel"><div class="scaleHead" aria-hidden="true"><span></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div><div id="audit"></div></div>
+  <div class="panel" id="auditResult" hidden></div>
+  <div class="foot"><button class="btn ghost" data-prev>Back</button><button class="btn next" data-next>Continue</button></div>
+</section>
+
+<!-- ============ 13 ASSESS ============ -->
+<section class="mod" id="mAssess" data-part="Part 3: Lead the partnership" data-title="Final assessment" data-time="5 min">
+  <p class="kicker">Section 13</p>
+  <h2>Final assessment</h2>
+  <p class="lead">Eight scenario questions. The pass mark is 80% (7 out of 8). You'll see feedback after each answer, and you can retake it.</p>
+  <div id="kc"></div>
+  <div class="fb info" id="kcScore"></div>
+  <div class="foot"><button class="btn ghost" data-prev>Back</button><button class="btn next" data-next>Continue</button></div>
+</section>
+
+<!-- ============ 14 PLAN ============ -->
+<section class="mod" id="mPlan" data-part="Part 3: Lead the partnership" data-title="Account strategy and 30-day plan" data-time="4 min">
+  <p class="kicker noprintsec">Section 14</p>
+  <h2>My account strategy on a page</h2>
+  <p class="lead">Use the account you chose at the start, or another important one. Print it or save it as a PDF, and share it with your leadership team or the account's senior owner.</p>
+  <div class="panel">
+    <div class="grid g2">
+      <div><label for="sAcct">Account</label><input type="text" id="sAcct" data-save></div>
+      <div><label for="sStyle">My style, and the style of the client's key decision-maker</label><input type="text" id="sStyle" data-save></div>
+      <div><label for="sNow">Where they are on the Loyalty Ladder now</label><select id="sNow" data-save><option></option><option>Customer</option><option>Client</option><option>Supporter</option><option>Advocate</option><option>Partner</option></select></div>
+      <div><label for="sTarget">Where I want them in 12 months</label><select id="sTarget" data-save><option></option><option>Client</option><option>Supporter</option><option>Advocate</option><option>Partner</option></select></div>
+    </div>
+    <label for="sJob">The client's most important job right now (functional, emotional or social)</label><textarea id="sJob" data-save></textarea>
+    <label for="sGap">Relationship gaps to close (who, and how)</label><textarea id="sGap" data-save></textarea>
+    <label for="sValue">My value story headline for the next executive review</label><textarea id="sValue" data-save></textarea>
+    <label for="sRisk">The biggest risk, and the leading indicator I'll watch</label><textarea id="sRisk" data-save></textarea>
+    <label for="sChange">One change I'll make in the next 30 days</label><textarea id="sChange" data-save></textarea>
+    <label for="sCoach">One CX360 framework I'll ask my managers about, and how</label><textarea id="sCoach" data-save></textarea>
+    <label for="sShare">I'll share this with (name) by (date)</label><input type="text" id="sShare" data-save>
+  </div>
+  <p class="noprint small muted">Your entries are saved on this device as you type, where your browser allows it.</p>
+  <div class="foot"><button class="btn ghost" data-prev>Back</button><span><button class="btn ghost" id="printPlan">Print or save as PDF</button> <button class="btn next" data-next>Continue</button></span></div>
+</section>
+
+<!-- ============ TOOLKIT ============ -->
+<section class="mod toolkit" id="mTools" data-part="Toolkit" data-title="Client excellence toolkit" data-time="Keep for reference">
+  <p class="kicker">Your toolkit</p>
+  <h2>Client excellence toolkit</h2>
+  <p class="lead">Quick-reference tools for your next executive review, renewal or coaching conversation.</p>
+  <div class="tool"><h4>Client styles at a glance</h4>
+    <table><tr><td>Analytical</td><td>Wants data, method and root cause. Send a pre-read. Show your working.</td></tr>
+    <tr><td>Relational</td><td>Wants to feel the partnership and know their people are looked after. Open warmly; acknowledge impact on their team.</td></tr>
+    <tr><td>Driver</td><td>Wants the headline, the decision and the next step. Keep it short.</td></tr>
+    <tr><td>Visionary</td><td>Wants to know where this is going. Link results to their long-term plans.</td></tr></table></div>
+  <div class="tool"><h4>Coaching prompts for CX360 frameworks</h4><table id="toolCoach"></table></div>
+  <div class="tool"><h4>Relationship map template</h4>
+    <table><tr><td>Sponsor</td><td>Name / strength / last senior contact / next step</td></tr><tr><td>Economic buyer</td><td></td></tr><tr><td>Influencers</td><td></td></tr>
+    <tr><td>Champions</td><td></td></tr><tr><td>Detractors</td><td></td></tr><tr><td>Operational contacts</td><td></td></tr></table></div>
+  <div class="tool"><h4>Value story (IMPACT) for executive reviews</h4>
+    <table><tr><td>Identify</td><td>What we did operationally</td></tr><tr><td>Map</td><td>The business outcome: cash flow, cost, efficiency, experience</td></tr>
+    <tr><td>Present</td><td>In the client's language, not internal metrics</td></tr><tr><td>Align</td><td>To their quarterly or annual goals</td></tr>
+    <tr><td>Communicate</td><td>Regularly, not only when asked</td></tr><tr><td>Track</td><td>The trend, not just the snapshot</td></tr></table></div>
+  <div class="tool"><h4>Client health checklist</h4>
+    <ul><li>Senior client contacts attending reviews</li><li>Sponsor and economic buyer relationships current</li><li>NPS, CSAT and effort trend, not just the latest score</li><li>Tone and length of client emails</li><li>New requests, scope pressure and competitor contact</li><li>Voice-of-client actions closed and communicated back</li></ul></div>
+  <div class="foot"><button class="btn ghost" data-prev>Back</button><span><button class="btn ghost" id="printTools">Print or save toolkit</button> <button class="btn next" id="finishBtn">Finish course</button></span></div>
+  <div class="fb good" id="finishMsg"></div>
+</section>
+
+</main>
+</div>
+
+<script>
+try { history.scrollRestoration = "manual"; } catch (e) { }
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const mods = $$(".mod");
+
+/* ---------- Saved progress (this device only) ---------- */
+const KEY = "hrc_cx_excellence_v1";
+const store = {
+  get() { try { return JSON.parse(window.localStorage.getItem(KEY)) || null; } catch (e) { return null; } },
+  set(v) { try { window.localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) { } },
+  clear() { try { window.localStorage.removeItem(KEY); } catch (e) { } }
+};
+const state = { cur: 0, done: [], adrv: Array(12).fill(null), pulse: 0, audit: Array(5).fill(0), fields: {}, kcPassed: false, myStyle: null };
+const save = () => store.set(state);
+
+/* ---------- Navigation ---------- */
+const navList = $("#navList");
+let lastPart = "";
+mods.forEach((m, i) => {
+  if (m.dataset.part !== lastPart) { lastPart = m.dataset.part; const h = document.createElement("li"); h.className = "partHead"; h.textContent = lastPart; navList.appendChild(h); }
+  const li = document.createElement("li"); li.dataset.idx = i;
+  li.innerHTML = `<button data-go="${i}"><span class="dot">${i === 0 ? "★" : i === mods.length - 1 ? "+" : i + 1}</span><span class="t">${m.dataset.title}<span class="m">${m.dataset.time}</span></span></button>`;
+  navList.appendChild(li);
+});
+function show(i, noSave) {
+  state.cur = i; if (!noSave) save();
+  mods.forEach((m, k) => m.classList.toggle("active", k === i));
+  $$("#navList button").forEach(b => b.setAttribute("aria-current", +b.dataset.go === i ? "true" : "false"));
+  window.scrollTo({ top: 0 }); $("#main").focus({ preventScroll: true });
+  $("#side").classList.remove("open"); $("#menuBtn").setAttribute("aria-expanded", "false");
+}
+function paintProgress() {
+  $$("#navList li[data-idx]").forEach(li => li.classList.toggle("done", state.done.includes(+li.dataset.idx)));
+  $("#progBar").style.width = Math.round(state.done.length / mods.length * 100) + "%";
+  $("#progLabel").textContent = `${state.done.length} of ${mods.length} sections complete`;
+}
+function complete(i) { if (!state.done.includes(i)) state.done.push(i); paintProgress(); save(); }
+navList.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) show(+b.dataset.go); });
+$$("[data-next]").forEach(b => b.addEventListener("click", () => { complete(state.cur); show(Math.min(state.cur + 1, mods.length - 1)); }));
+$$("[data-prev]").forEach(b => b.addEventListener("click", () => show(Math.max(state.cur - 1, 0))));
+$("#menuBtn").addEventListener("click", () => { const o = $("#side").classList.toggle("open"); $("#menuBtn").setAttribute("aria-expanded", o); });
+
+/* ---------- Shared helpers ---------- */
+function single(el, items, opts = {}) {
+  // items: [{stem, opts:[[text, score(0|1|2), feedback]], tag?}]
+  $(el).innerHTML = items.map((q, i) => {
+    const order = shuffle(q.opts.map((_, j) => j));
+    return `<div class="panel q">${q.counter ? `<div class="counter">${q.counter}</div>` : ""}${q.stem ? `<div class="stem">${q.stem}</div>` : ""}
+      <div class="opts">${order.map(j => `<button class="opt" data-q="${i}" data-j="${j}">${q.opts[j][0]}</button>`).join("")}</div><div class="fb" id="${el.slice(1)}fb${i}" aria-live="polite"></div></div>`;
+  }).join("");
+  $$(el + " .opt").forEach(b => b.addEventListener("click", () => {
+    const i = +b.dataset.q, q = items[i], o = q.opts[+b.dataset.j], fb = $(`${el}fb${i}`); if (fb.classList.contains("show")) return;
+    b.classList.add(o[1] === 2 ? "correct" : "wrong"); b.setAttribute("aria-pressed", "true");
+    fb.className = "fb show " + (o[1] === 2 ? "good" : o[1] === 1 ? "info" : "bad");
+    fb.innerHTML = (q.tag ? `<span class="tag">${q.tag}</span><p style="margin:8px 0 0">` : "") + o[2] + (q.tag ? "</p>" : "");
+    if (opts.onAnswer) opts.onAnswer(i, o[1]);
+  }));
+}
+function multi(el, items, btn, fbEl, goodMsg, partialMsg) {
+  $(el).innerHTML = items.map((it, i) => `<label><input type="checkbox" data-i="${i}"> <span>${it[0]}</span></label>`).join("");
+  $(btn).addEventListener("click", () => {
+    let right = 0, wrong = 0;
+    $$(el + " input").forEach(c => {
+      const ok = items[+c.dataset.i][1], lab = c.closest("label"); lab.classList.remove("correct", "wrong", "missed");
+      if (c.checked && ok) { lab.classList.add("correct"); right++; } else if (c.checked) { lab.classList.add("wrong"); wrong++; } else if (ok) lab.classList.add("missed");
+    });
+    const total = items.filter(x => x[1]).length, fb = $(fbEl);
+    fb.className = "fb show " + (right === total && !wrong ? "good" : "info");
+    fb.innerHTML = right === total && !wrong ? goodMsg : partialMsg(right, total, wrong);
+  });
+}
+function scaleRow(container, label, idx, value, onPick) {
+  const row = document.createElement("div"); row.className = "scale"; row.setAttribute("role", "group"); row.setAttribute("aria-label", label);
+  row.innerHTML = `<span class="lab">${label}</span>` + [1, 2, 3, 4, 5].map(v => `<button data-v="${v}" aria-pressed="${value === v}" aria-label="${v}">${v}</button>`).join("");
+  $$("button", row).forEach(b => b.addEventListener("click", () => { $$("button", row).forEach(x => x.setAttribute("aria-pressed", x === b)); onPick(idx, +b.dataset.v); }));
+  container.appendChild(row);
+}
+
+/* ---------- 1. Welcome ---------- */
+const pulseEl = $("#pulse");
+pulseEl.innerHTML = [1, 2, 3, 4, 5].map(v => `<button data-v="${v}" aria-pressed="false" aria-label="${v}">${v}</button>`).join("");
+$$("#pulse button").forEach(b => b.addEventListener("click", () => { state.pulse = +b.dataset.v; $$("#pulse button").forEach(x => x.setAttribute("aria-pressed", x === b)); save(); }));
+const AVOID = [["Basic communication skills", "Executive influence and stakeholder alignment"], ["Handling an unhappy client", "Protecting trust, commercial value and reputation under pressure"],
+  ["Reviewing SLA dashboards", "Reading trends, business impact and early relationship risk"], ["Collecting client feedback", "Turning feedback into decisions and visible change"],
+  ["One account at a time", "Leading the experience across a whole portfolio"], ["Solving today's issue", "Preventing the next one and improving the operating model"]];
+$("#avoidList").innerHTML = `<div class="avoid" style="font-weight:700"><span>CX360 focus (AMs and Managers)</span><i></i><span>This course (senior leaders)</span></div>` +
+  AVOID.map(a => `<div class="avoid"><span>${a[0]}</span><i>→</i><b>${a[1]}</b></div>`).join("");
+
+/* ---------- 2. ADRV ---------- */
+const STYLES = {
+  AD: { name: "Advisor", motto: "Facts build credibility", color: "var(--teal)",
+    strengths: "Analytical, thorough and reliable. Clients trust your numbers, and your recommendations are well grounded.",
+    risk: "You may lead with detail when a senior client wants the headline, and invest less in the personal relationships that carry a renewal.",
+    flex: "Before every executive meeting, write the one sentence you want them to remember. Lead with it, and keep the detail ready for questions." },
+  CO: { name: "Connector", motto: "Relationships build trust", color: "var(--sage)",
+    strengths: "Empathetic and trusted. Clients open up to you, and you often hear about problems before anyone else.",
+    risk: "You may soften or delay difficult messages to protect the relationship, and rely on warmth where an analytical client wants evidence.",
+    flex: "Pair every relationship conversation with one clear fact and one clear ask. Say the hard thing early; the relationship can take it." },
+  AC: { name: "Achiever", motto: "Results build confidence", color: "var(--coral)",
+    strengths: "Decisive and action-oriented. You turn meetings into decisions and close performance gaps fast.",
+    risk: "You may come across as impatient, push for commitments before the client is ready, and under-invest in the longer-term view.",
+    flex: "Before proposing an action, ask one more question about what the client is trying to achieve. Link quick wins to their bigger goals." },
+  ST: { name: "Strategist", motto: "Vision builds partnerships", color: "var(--blue)",
+    strengths: "Future-focused and influential. You see where the partnership could go and position your team as part of the client's plans.",
+    risk: "You may skip past today's operational concerns or the detail an analytical client needs, and promise a future before the present is solid.",
+    flex: "Earn the right to talk about the future: acknowledge today's issues first, then link the vision to one concrete next step." }
+};
+const ADRV = [
+  ["A client CFO asks to meet next week about \"value for money.\" You prepare by...",
+    [["AD", "Building a detailed cost and performance analysis for the last 12 months"], ["CO", "Calling your contacts in their team to understand what's behind the question"],
+     ["AC", "Preparing three concrete savings or improvements you can commit to"], ["ST", "Framing where the partnership could go over the next two years"]]],
+  ["In a QBR, the part you most enjoy leading is...",
+    [["CO", "The conversation about how the partnership is working for them"], ["ST", "The forward look at their priorities and how you can help"],
+     ["AD", "Walking through the performance data and trends"], ["AC", "Agreeing actions and owners before the meeting ends"]]],
+  ["A new COO joins the client. Your first move is to...",
+    [["AC", "Get a short meeting booked and show a quick result in their first month"], ["AD", "Research their background and the metrics they're likely to care about"],
+     ["ST", "Understand their agenda and position your team as part of it"], ["CO", "Ask your existing contacts for a warm introduction and get to know them personally"]]],
+  ["Renewal is five months away. You spend most of your energy on...",
+    [["ST", "Shaping a proposal for what the next contract could achieve"], ["AC", "Closing any open performance gaps fast"],
+     ["CO", "Strengthening relationships across their leadership team"], ["AD", "Building a strong evidence pack of the value delivered"]]],
+  ["Your Account Managers would describe you in client meetings as...",
+    [["AD", "\"The one who always has the numbers\""], ["AC", "\"The one who gets decisions made\""],
+     ["CO", "\"The one clients trust and open up to\""], ["ST", "\"The one who sees the bigger picture\""]]],
+  ["A client executive challenges a number in your report. You instinctively...",
+    [["CO", "Acknowledge their concern and ask what's driving it"], ["AD", "Walk them through how the number was calculated"],
+     ["ST", "Step back and discuss what the trend means for their goals"], ["AC", "Commit to a corrected view and a date"]]],
+  ["When you lose a scope expansion, you most want to know...",
+    [["ST", "Whether the client's strategic direction changed"], ["CO", "Whether the relationship was strong enough at the right level"],
+     ["AC", "What you could have done faster or better"], ["AD", "What the data shows about where you fell short"]]],
+  ["What frustrates you most in client meetings is...",
+    [["AC", "Long discussions with no decisions"], ["ST", "Conversations stuck on last month's operational detail"],
+     ["AD", "Claims made without evidence"], ["CO", "Clients who stay guarded and formal"]]],
+  ["A client asks for something outside scope at no extra cost. You first...",
+    [["AD", "Work out the true cost and impact before responding"], ["ST", "Consider whether it opens a bigger opportunity"],
+     ["CO", "Talk it through with them to understand why it matters now"], ["AC", "Look for a quick way to deliver part of it"]]],
+  ["Preparing for an executive update, you spend most time on...",
+    [["CO", "Who will be in the room and what each of them needs"], ["AC", "The decisions and commitments you want to leave with"],
+     ["ST", "The story that links the results to their future plans"], ["AD", "Making sure every figure is accurate and backed up"]]],
+  ["A long-standing client relationship is going well. You're most likely to...",
+    [["AC", "Raise the targets and push for the next improvement"], ["CO", "Invest time in deepening the personal relationships"],
+     ["AD", "Run a review to make sure nothing is slipping unseen"], ["ST", "Propose a joint initiative that takes the partnership further"]]],
+  ["The client situation you'd find hardest is one where...",
+    [["ST", "The client only wants to talk about day-to-day issues"], ["AD", "Decisions are being made on opinion rather than data"],
+     ["AC", "Nothing is moving and nobody will commit"], ["CO", "You can't build a personal connection with the key decision-maker"]]]
+];
+let pIdx = 0;
+function renderProfile() {
+  const [stem, opts] = ADRV[pIdx], a = state.adrv;
+  $("#profileWrap").innerHTML = `<div class="counter">Situation ${pIdx + 1} of ${ADRV.length}</div>
+    <div class="steps">${ADRV.map((_, i) => `<i class="${i <= pIdx ? "on" : ""}"></i>`).join("")}</div>
+    <div class="q"><div class="stem" id="pStem">${stem}</div><div class="opts" role="group" aria-labelledby="pStem">
+    ${opts.map(([k, t]) => `<button class="opt" data-k="${k}" aria-pressed="${a[pIdx] === k}">${t}</button>`).join("")}</div></div>
+    <div style="display:flex;gap:10px;justify-content:space-between">
+      <button class="btn ghost" id="pBack" ${pIdx === 0 ? "disabled" : ""}>Previous</button>
+      <button class="btn" id="pNext" ${a[pIdx] ? "" : "disabled"}>${pIdx === ADRV.length - 1 ? "See my style" : "Next"}</button></div>`;
+  $$("#profileWrap .opt").forEach(b => b.addEventListener("click", () => {
+    a[pIdx] = b.dataset.k; save();
+    $$("#profileWrap .opt").forEach(x => x.setAttribute("aria-pressed", x === b)); $("#pNext").disabled = false;
+  }));
+  $("#pBack").addEventListener("click", () => { pIdx--; renderProfile(); });
+  $("#pNext").addEventListener("click", () => { if (pIdx < ADRV.length - 1) { pIdx++; renderProfile(); } else showProfile(); });
+}
+function showProfile() {
+  const c = { AD: 0, CO: 0, AC: 0, ST: 0 }; state.adrv.forEach(x => x && c[x]++);
+  const sorted = Object.keys(c).sort((x, y) => c[y] - c[x]);
+  const top = sorted[0], second = sorted[1], blend = c[top] - c[second] <= 1, s = STYLES[top];
+  state.myStyle = top; save(); paintFlex();
+  const label = blend ? `${s.name} / ${STYLES[second].name}` : s.name;
+  if (!$("#sStyle").value) { $("#sStyle").value = "Me: " + label + " | Key decision-maker: "; state.fields.sStyle = $("#sStyle").value; save(); }
+  $("#profileWrap").hidden = true;
+  const r = $("#profileResult"); r.hidden = false;
+  r.innerHTML = `<div class="styleCard" style="background:${s.color}"><p style="margin:0;opacity:.9">Your client leadership style${blend ? " (a blend: within 1 point)" : ""}</p>
+      <h4>${label}</h4><p>"${s.motto}"${blend ? ` | "${STYLES[second].motto}"` : ""}</p></div>
+    <div class="bars">${Object.keys(STYLES).map(k => `<div class="barRow"><span>${STYLES[k].name}</span><div class="barTrack"><i style="width:${c[k] / ADRV.length * 100}%;background:${STYLES[k].color}"></i></div><span>${c[k]}</span></div>`).join("")}</div>
+    <div class="grid g3">
+      <div class="panel"><h4>Strengths</h4><p class="small" style="margin:0">${s.strengths}</p></div>
+      <div class="panel"><h4>Client risk</h4><p class="small" style="margin:0">${s.risk}</p></div>
+      <div class="panel"><h4>Your flex move</h4><p class="small" style="margin:0">${s.flex}</p></div>
+    </div>
+    ${blend ? `<p class="small muted">Your ${s.name} and ${STYLES[second].name} scores are within one point, so you have a blended style. Read both, and notice which shows up with your most senior clients.</p>` : ""}
+    <p class="small muted">There is no best style. Each one wins with some clients and struggles with others, which is why the next section is about reading your client.</p>
+    <button class="btn ghost" id="pRetake">Retake</button>`;
+  $("#pRetake").addEventListener("click", () => { state.adrv.fill(null); state.myStyle = null; save(); pIdx = 0; r.hidden = true; $("#profileWrap").hidden = false; renderProfile(); paintFlex(); });
+}
+
+/* ---------- 3. Spotter + flex ---------- */
+const CSTY = { AN: "Analytical", RE: "Relational", DR: "Driver", VI: "Visionary" };
+const EXECS = [
+  { n: "Dana Ruiz", r: "Chief Financial Officer", a: "AN", cues: ["Email: \"Before Thursday, please send the variance analysis by tower and a note on methodology.\"", "Asks \"How was this calculated?\" in every review", "Reads the pre-read in full and marks it up"] },
+  { n: "Mark Ellison", r: "Chief Operating Officer (new)", a: "DR", cues: ["Email: \"Three lines. What's broken, what are you doing, when is it fixed?\"", "Leaves meetings once the decision is made", "Decides quickly and rarely revisits"] },
+  { n: "Priya Shah", r: "VP, Patient Experience", a: "RE", cues: ["Opens every call by asking how your team is doing", "Uneasy when your contacts change", "Talks about how issues affect her staff and patients"] },
+  { n: "James Okafor", r: "Chief Strategy Officer", a: "VI", cues: ["Talks about 2028 expansion and automation", "Loses interest in monthly operational detail", "Often asks, \"What else could you be doing for us?\""] }
+];
+$("#execs").innerHTML = EXECS.map((e, i) => `<div class="panel"><h4>${e.n}</h4><p class="small muted" style="margin:0">${e.r}</p>${e.cues.map(c => `<blockquote>${c}</blockquote>`).join("")}
+  <label for="ex${i}" style="margin-top:6px">Style</label><select id="ex${i}"><option value="">Choose a style</option>${Object.entries(CSTY).map(([k, v]) => `<option value="${k}">${v}</option>`).join("")}</select><span id="exm${i}" aria-live="polite"></span></div>`).join("");
+$("#spotCheck").addEventListener("click", () => {
+  let right = 0;
+  EXECS.forEach((e, i) => { const v = $("#ex" + i).value, ok = v === e.a; if (ok) right++; $("#exm" + i).innerHTML = v ? (ok ? " ✓" : ` ✗ <span class="small">${CSTY[e.a]}</span>`) : ""; });
+  const fb = $("#spotFb"); fb.className = "fb show " + (right === 4 ? "good" : "info");
+  fb.innerHTML = right === 4 ? "<b>All four correct.</b> Dana is Analytical, Mark is a Driver, Priya is Relational and James is Visionary. Notice that the account's biggest gap, the new COO, is a Driver: he'll judge you on speed and clarity." :
+    `<b>${right} of 4 correct.</b> Dana is Analytical (method, data, pre-reads), Mark is a Driver (short, decisive), Priya is Relational (people, continuity) and James is Visionary (future, possibilities). Look for how each person asks questions; it's usually the clearest cue.`;
+});
+const FLEX = {
+  AD: { AN: "Natural fit. Don't drown them: choose the three numbers that matter most.", RE: "Open with their people and the relationship before the data.", DR: "Lead with the headline and the decision. Keep the detail in reserve.", VI: "Connect your numbers to where they want to go." },
+  CO: { AN: "Bring evidence. Warmth alone won't build credibility with them.", RE: "Natural fit. Make sure the hard message still gets said.", DR: "Cut the warm-up. Get to the point in the first minute.", VI: "Link the relationship to their big agenda: who you can help them bring along." },
+  AC: { AN: "Slow down. Show the root cause and method behind your action.", RE: "Pause to acknowledge the impact on their people before the action plan.", DR: "Natural fit. Avoid a contest of wills: agree the decision and move.", VI: "Show how quick wins build towards their long-term goals." },
+  ST: { AN: "Ground the vision in data and a credible plan.", RE: "Make the future personal: what it means for their team.", DR: "Vision in one sentence, then the next concrete step.", VI: "Natural fit. Agree what happens next week, not just the big picture." }
+};
+function paintFlex() {
+  $("#flexTable").innerHTML = `<tr><th>Your style ↓ / Client style →</th>${Object.values(CSTY).map(v => `<th>${v}</th>`).join("")}</tr>` +
+    Object.keys(FLEX).map(k => `<tr class="${state.myStyle === k ? "mine" : ""}"><td class="me">${STYLES[k].name}${state.myStyle === k ? " (you)" : ""}</td>${Object.keys(CSTY).map(c => `<td>${FLEX[k][c]}</td>`).join("")}</tr>`).join("");
+  $("#flexIntro").textContent = state.myStyle ? `Your row (${STYLES[state.myStyle].name}) is highlighted. Read across to see how to adjust for each client style.` :
+    "Find your style (row) and your client's style (column) to see one adjustment that makes the biggest difference.";
+}
+paintFlex();
+single("#cooQ", [{ stem: "", opts: [
+  ["\"Mark, welcome to Meridian. I'd love 45 minutes to walk you through our full performance history, our methodology and our team structure.\"", 0, "Thorough, but a Driver hears \"45 minutes of history.\" It's the reason he hasn't replied."],
+  ["\"Mark, 20 minutes this week? I'll bring three things: where we're strong, the one risk I'm watching on your account, and a decision I'd value your view on.\"", 2, "Right. Short, specific and about decisions. It respects his time and gives him a reason to meet: there's a risk and a decision."],
+  ["\"Mark, I'd really like to get to know you and understand your vision for Meridian over a coffee when you have time.\"", 1, "Warm, and fine for a Relational client. A new Driver COO is more likely to respond to a clear purpose and a short time ask."]] }]);
+
+/* ---------- 4. CX360 language ---------- */
+const COACH = [["Trust Equation", "Credibility + Reliability + Intimacy, divided by Self-orientation", "\"Which part of the trust equation is weakest with this client right now?\""],
+  ["BLUF", "Bottom Line Up Front: the conclusion first, then the evidence", "\"What was your bottom line, and did you lead with it?\""],
+  ["ACE", "Acknowledge & Align, Clarify & Control, Execute & Enhance: structuring a client call", "\"How did you open the call and confirm the agenda?\""],
+  ["CALM / LEAD", "For frustrated or escalating clients: Clarify, Acknowledge, Lead, Move forward / Listen, Empathise, Assure, Deliver", "\"What did you lead with: action or explanation?\""],
+  ["STAND / PACE", "Assertive calls (State, Tone, Anchor, Name, Deliver) and emails (Purpose, Accurate, Concise, End with the ask)", "\"Read me the first line of that email. Is the purpose clear?\""],
+  ["LAER", "Handling pushback: Listen, Acknowledge, Explore, Respond", "\"What was really driving the pushback?\""],
+  ["HEARD", "Service recovery: Hear, Empathise, Apologise, Resolve, Diagnose", "\"What did you diagnose as the root cause, and is it on the next call agenda?\""],
+  ["PREP", "Proactive updates: Predict, Raise, Explain, Present a plan", "\"Which risk did we raise before the client noticed this month?\""],
+  ["IMPACT", "Turning operations into business outcomes: Identify, Map, Present, Align, Communicate, Track", "\"What did this result mean for the client's business?\""],
+  ["Loyalty Ladder", "Customer → Client → Supporter → Advocate → Partner", "\"Where is this client on the ladder, and what moves them up one rung?\""]];
+$("#coachList").innerHTML = `<div class="coach" style="font-weight:700"><span>Framework</span><span>What your managers learned</span><span>A coaching question you can ask</span></div>` +
+  COACH.map(c => `<div class="coach"><b>${c[0]}</b><span>${c[1]}</span><span><i>${c[2]}</i></span></div>`).join("");
+$("#toolCoach").innerHTML = COACH.map(c => `<tr><td>${c[0]}</td><td>${c[2]}</td></tr>`).join("");
+single("#matchQs", [
+  { counter: "Behaviour 1 of 4", stem: "A manager writes to the client: \"Next week's volume spike could push TAT over target. Here's why, and here's our plan to add capacity from Monday.\"", opts: [["PREP", 2, "Yes: Predict, Raise, Explain, Present a plan. Proactive, before the client noticed."], ["LAER", 0, "LAER is for pushback. This is a proactive warning: PREP."], ["IMPACT", 0, "IMPACT is about showing value. This is a proactive risk warning: PREP."]] },
+  { counter: "Behaviour 2 of 4", stem: "On a call, the client says the team keeps missing things. The manager lets them finish, acknowledges the concern, asks what's really behind it, then responds with a plan.", opts: [["CALM", 1, "Close, but this is the pushback framework from Module 5: Listen, Acknowledge, Explore, Respond (LAER)."], ["LAER", 2, "Yes: Listen, Acknowledge, Explore, Respond."], ["ACE", 0, "ACE structures a whole call. This is handling pushback: LAER."]] },
+  { counter: "Behaviour 3 of 4", stem: "In a QBR, a manager says: \"Faster posting means your finance team now closes month-end two days earlier.\"", opts: [["IMPACT", 2, "Yes: an operational result mapped to a business outcome, in the client's language."], ["BLUF", 1, "It's a clear headline, but the skill on show is mapping to a business outcome: IMPACT."], ["STAND", 0, "STAND is for assertive calls. This is IMPACT."]] },
+  { counter: "Behaviour 4 of 4", stem: "After a missed deadline, a manager says: \"We missed this and I take full responsibility. It'll be complete by Thursday, and on our next call I'll share what caused it.\"", opts: [["HEARD", 2, "Yes: Apologise (specifically), Resolve (what, by when), and Diagnose (root cause on the next call)."], ["PACE", 0, "PACE is for email structure. This is service recovery: HEARD."], ["Trust Equation", 1, "It builds reliability, but the framework being used is HEARD."]] }
+]);
+
+/* ---------- 5. Health ---------- */
+const METRICS = [["SLA compliance", "99.2%", "6 months green", "var(--sage)"], ["Accuracy", "98.7%", "Target 98%", "var(--sage)"], ["TAT", "22 hrs", "Target 24 hrs", "var(--sage)"],
+  ["CSAT", "4.2", "4.5 → 4.4 → 4.2 over 3 quarters (target 4.0)", "var(--gold)"], ["Client leaders at QBR", "2", "Down from 5", "var(--coral)"], ["Formal escalations", "0", "This quarter", "var(--sage)"]];
+$("#healthPanel").innerHTML = METRICS.map(m => `<div class="metric" style="border-top-color:${m[3]}"><span>${m[0]}</span><b>${m[1]}</b><span>${m[2]}</span></div>`).join("");
+multi("#warnChecks", shuffle([["SLA at 99.2% for six months", false], ["Client leaders attending the QBR dropped from five to two", true], ["The new COO joined six weeks ago and hasn't met us yet", true],
+  ["CSAT has slipped three quarters in a row, though it's still above target", true], ["Accuracy is 98.7% against a 98% target", false], ["The client invited a competitor to an \"innovation day\"", true],
+  ["Client emails are getting shorter, with the COO copied more often", true], ["Monthly volume is up 8%, as forecast", false], ["No formal escalations this quarter", false]]),
+  "#warnCheck", "#warnFb", "<b>Exactly.</b> Five warning signs, and none of them show on the SLA report. A green dashboard with these signals is a relationship at risk. Notice too that \"no formal escalations\" can mean the client has stopped bothering to complain.",
+  (r, t, w) => `<b>You found ${r} of ${t}${w ? `, and picked ${w} that ${w > 1 ? "are" : "is"} healthy` : ""}.</b> The warning signs are the leading indicators: QBR attendance, the silent new COO, the CSAT trend, the competitor contact and the change in email tone. The SLA, accuracy and forecast volume are healthy. "No formal escalations" isn't a warning on its own, but it can mean the client has stopped complaining.`);
+
+/* ---------- 6. Portfolio ---------- */
+const RUNGS = [["Partner", "They co-create with you and defend your contract internally", "var(--navy)"], ["Advocate", "They refer you to peers and speak well of you unprompted", "var(--blue)"],
+  ["Supporter", "They renew and defend you in internal conversations", "var(--teal)"], ["Client", "They use the service. Satisfied, but not committed", "var(--aqua)"], ["Customer", "They have a contract. No emotional connection yet", "var(--sage)"]];
+$("#ladder").innerHTML = RUNGS.map(r => `<div style="background:${r[2]}"><span>${r[0]}</span><small>${r[1]}</small></div>`).join("");
+const ACCTS = [["Billing account: renewed early and recently recommended us to a peer organisation", "Advocate"], ["Customer Service account: four months in, satisfied, no QBR held yet", "Client"],
+  ["Coding account: co-designing a two-year automation roadmap with us", "Partner"], ["AR/Collections account: contract signed three weeks ago", "Customer"],
+  ["Posting account: renewed last year, defends us internally when issues come up", "Supporter"], ["Meridian: green SLAs, sponsor gone, competitor invited", "Client"]];
+$("#ladderSort").innerHTML = ACCTS.map((a, i) => `<div class="sortRow"><label for="ld${i}" style="font-weight:400;margin:0">${a[0]}</label>
+  <select id="ld${i}"><option value="">Choose a rung</option>${RUNGS.map(r => `<option>${r[0]}</option>`).join("")}</select><span id="ldm${i}" aria-live="polite"></span></div>`).join("");
+$("#ladderCheck").addEventListener("click", () => {
+  let right = 0;
+  ACCTS.forEach((a, i) => { const v = $("#ld" + i).value, ok = v === a[1] || (i === 5 && v === "Supporter"); if (ok) right++; $("#ldm" + i).textContent = v ? (ok ? "✓" : "✗") : ""; });
+  const fb = $("#ladderFb"); fb.className = "fb show " + (right === 6 ? "good" : "info");
+  fb.innerHTML = `<b>${right} of 6.</b> Suggested rungs: Billing = Advocate, Customer Service = Client, Coding = Partner, AR/Collections = Customer, Posting = Supporter. Meridian was a Supporter, but without a sponsor and with a competitor invited, it's slipping towards Client. Either answer is reasonable; the point is that it's moving the wrong way.`;
+  if (!$("#ladderQ").innerHTML) single("#ladderQ", [{ stem: "You have limited senior time this quarter. Where do you invest it first?", opts: [
+    ["Meridian: rebuild senior relationships before renewal", 2, "Right. It's the account moving down the ladder, with renewal five months away. Senior attention is what it needs most."],
+    ["The Coding partner account: deepen what's already working", 1, "Valuable, but it's already at the top of the ladder. Protect it, but the urgent risk is Meridian."],
+    ["The new AR/Collections account: make a strong first impression", 1, "Important, and your managers can lead much of it. Meridian's slide needs senior intervention now."]] }]);
+});
+
+/* ---------- 7. Map ---------- */
+const REL = [["Mark Ellison", "COO (new)", "Economic buyer since the sponsor left", "s-none", "None"], ["Dana Ruiz", "CFO", "Influencer on renewal and budget", "s-weak", "Weak: meets only at QBRs"],
+  ["Priya Shah", "VP, Patient Experience", "Champion", "s-strong", "Strong"], ["Tom Becker", "Director, Revenue Cycle", "Operational contact", "s-strong", "Strong: daily contact"],
+  ["James Okafor", "Chief Strategy Officer", "Influencer on future scope", "s-none", "None"], ["(Former) VP Operations", "Sponsor, left 2 months ago", "No replacement sponsor identified", "s-none", "Gone"]];
+$("#relTable").innerHTML = `<tr><th>Name</th><th>Title</th><th>Role in the decision</th><th>Our relationship</th></tr>` + REL.map(r => `<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td><span class="str ${r[3]}">${r[4]}</span></td></tr>`).join("");
+multi("#gapChecks", [["Mark Ellison, COO: no relationship with the new economic buyer", true], ["Dana Ruiz, CFO: weak relationship with a key renewal influencer", true],
+  ["Priya Shah: strengthen the champion relationship further", false], ["Tom Becker: increase daily operational contact", false], ["James Okafor: build a relationship with strategy", false]],
+  "#gapCheck", "#gapFb", "<b>Right.</b> The COO now holds the decision and the CFO shapes the budget. Your strong relationships are all at operational or champion level, which won't carry a renewal on their own. James Okafor matters for growth later, but the renewal risk sits with Mark and Dana. Ask Priya, your champion, to help open the door.",
+  (r, t, w) => `<b>${r} of ${t}${w ? `, plus ${w} less urgent` : ""}.</b> The most urgent gaps are the COO (the new economic buyer) and the CFO (budget and renewal influencer). Your strong relationships are with Priya and Tom, at champion and operational level, and they won't carry the renewal alone. James matters for future growth, after the renewal risk is handled.`);
+
+/* ---------- 8. Decide ---------- */
+const DEC = [
+  { clock: "Decision 1 of 3 | Scope pressure", text: "Meridian's COO asks your team to take on a new reporting process \"as part of the partnership\", at no extra cost. Delivering it would mean moving two experienced people from a tower that serves another client.",
+    opts: [["Agree straight away. Renewal is close and you can't risk saying no.", 0, "It protects today's mood but puts another client's service at risk and sets a precedent that every request is free. The COO also learns that pressure works."],
+      ["Decline, and point to the contract scope.", 1, "Commercially sound, but it misses the chance to show partnership and confirms the COO's view that you're a vendor. There's a better way to protect the contract."],
+      ["Welcome the idea, cost it transparently, and offer options such as a phased start or a trade-off against lower-value work, agreed with your commercial lead.", 2, "Strong. You treat the request as a sign of the client's priorities, protect your other client, and make the trade-offs visible. That's how partners negotiate."]], tag: "Commercial vs relationship" },
+  { clock: "Decision 2 of 3 | Quality under the radar", text: "Your quality team finds the same type of error recurring in one Meridian process. Accuracy is still within SLA, and the client hasn't noticed. It could have compliance implications if it continues.",
+    opts: [["It's within SLA, so keep monitoring and act if it gets worse.", 0, "Within SLA isn't the same as safe. If the client or an auditor finds it first, the question will be why you knew and said nothing."],
+      ["Fix it, tell the client proactively with the root cause and prevention plan, and check any compliance steps with the right teams under our policies.", 2, "Right. This is PREP at senior level. Raising it first turns a hidden risk into evidence of transparency, which is exactly what a new COO needs to see."],
+      ["Fix it internally and quietly. There's no need to worry the client before renewal.", 1, "Fixing it is right, but staying quiet is a gamble. If it surfaces later, it looks like concealment just before renewal."]], tag: "Transparency vs timing" },
+  { clock: "Decision 3 of 3 | The pre-renewal promise", text: "In a meeting, the COO says renewal would be \"much easier\" if you commit to cutting turnaround time from 48 to 24 hours from next month. Your operations leaders say that isn't safely achievable without new capacity and process changes.",
+    opts: [["Commit now to secure the renewal, and work out how to deliver it later.", 0, "This trades a renewal today for a broken promise in month two, with a COO who will judge you on delivery. It's how strong accounts are lost a year later."],
+      ["Say clearly that it isn't possible.", 1, "Honest, but it ends the conversation. The COO's real need, faster turnaround, is still there, and a competitor may offer to meet it."],
+      ["Be honest about what's safe today, and offer a staged path, such as 36 hours in 90 days and 24 hours in six months, with milestones and the investment needed.", 2, "Excellent. You protect your credibility, take the COO's goal seriously, and turn a demand into a joint plan. A credible plan often wins more trust than a quick yes."]], tag: "Ambition vs credibility" }
+];
+let dScore = [];
+function renderDecide(i) {
+  if (i >= DEC.length) {
+    const s = dScore.reduce((a, b) => a + b, 0);
+    $("#decide").innerHTML = `<div class="panel"><h4>Decisions complete: ${s} out of 6</h4><p>${s === 6 ? "You balanced the relationship, commercial value and compliance in every decision. That's the judgement this level requires." : s >= 4 ? "Solid judgement, with one or two choices that traded long-term trust for short-term comfort. Look back at the feedback on those." : "These are genuinely hard trade-offs. Try again and notice how the strongest options make the trade-off visible rather than avoiding it."}</p>
+      <p class="small muted" style="margin:0">The pattern in every strong answer: take the client's need seriously, be transparent about constraints, and offer a path rather than a yes or a no.</p><p><button class="btn ghost" id="dAgain">Try again</button></p></div>`;
+    $("#dAgain").addEventListener("click", () => { dScore = []; renderDecide(0); }); return;
+  }
+  const D = DEC[i];
+  $("#decide").innerHTML = `<div class="steps">${DEC.map((_, k) => `<i class="${k <= i ? "on" : ""}"></i>`).join("")}</div>
+    <div class="scene"><div class="clock">${D.clock}</div><p style="margin:0;font-size:19px">${D.text}</p></div><div id="dq" style="margin-top:14px"></div>`;
+  single("#dq", [{ stem: "What do you do?", opts: D.opts, tag: D.tag }], { onAnswer: (_, sc) => {
+    dScore[i] = sc; const b = document.createElement("button"); b.className = "btn"; b.textContent = i < DEC.length - 1 ? "Next decision" : "See how you did";
+    b.addEventListener("click", () => renderDecide(i + 1)); $("#dqfb0").appendChild(document.createElement("p")).appendChild(b);
+  } });
+}
+renderDecide(0);
+
+/* ---------- 9. Value ---------- */
+$("#impactGrid").innerHTML = [["Identify", "What we did operationally"], ["Map", "The business outcome: cash, cost, efficiency, experience"], ["Present", "In the client's language, not ours"],
+  ["Align", "To their quarterly or annual goals"], ["Communicate", "Regularly, not only when asked"], ["Track", "The trend, not just the snapshot"]].map(x => `<div class="panel"><h4>${x[0]}</h4><p class="small" style="margin:0">${x[1]}</p></div>`).join("");
+const BA = [["Customer Service", "First-call resolution 79%. AHT 6:10. CSAT 93%.", "Four in five patients now get their answer on the first call, which means fewer repeat calls reaching your front desk every month."],
+  ["Billing", "Charge lag 2.1 days. Accuracy 99%.", "Claims now leave two days sooner, bringing cash forward and easing pressure on your month-end."],
+  ["Coding", "Accuracy 98.7%. Backlog cleared.", "Fewer coding-related denials means less rework for your billing team and a stronger position at audit time."],
+  ["Posting", "Posting TAT 24 hrs. Accuracy 99.5%.", "Your finance team now sees an accurate cash position the next day, so month-end closes faster."],
+  ["AR/Collections", "AR over 90 days down from 31% to 24%.", "Money that was stuck in old claims is coming in, improving your cash flow this quarter."],
+  ["Onboarding/EDI", "12 payers connected. 98% acceptance.", "New payers go live without disruption, so new revenue starts flowing on schedule."],
+  ["Labs", "3 automations live. 1,200 hours saved.", "Automation freed capacity that we've reinvested in your priority backlog, at no extra cost to you."],
+  ["Process Excellence & MIS", "Daily dashboard. 100% on-time reports.", "Your leaders now make decisions on same-day data instead of last week's."]];
+BA.forEach((b, i) => { const t = document.createElement("button"); t.setAttribute("role", "tab"); t.textContent = b[0]; t.addEventListener("click", () => showBA(i)); $("#baTabs").appendChild(t); });
+function showBA(i) {
+  $$("#baTabs button").forEach((t, k) => t.setAttribute("aria-selected", k === i));
+  $("#baPanel").innerHTML = `<div class="panel" style="background:var(--badBg)"><h4>Report (vendor)</h4><p style="margin:0">${BA[i][1]}</p></div><div class="panel" style="background:var(--goodBg)"><h4>Value story (partner)</h4><p style="margin:0">${BA[i][2]}</p></div>`;
+}
+showBA(0);
+multi("#valChecks", shuffle([["\"Claims leave two days sooner, bringing your cash forward ahead of your fiscal year-end.\"", true], ["\"We processed 14,200 transactions this quarter.\"", false],
+  ["\"Fewer repeat calls means your front-desk team can focus on patients in clinic.\"", true], ["\"All SLAs were met for the sixth month running.\"", false],
+  ["\"Same-day data now lets your leaders spot problems a week earlier.\"", true], ["\"Accuracy was 98.7% against a 98% target.\"", false]]),
+  "#valCheck", "#valFb", "<b>Exactly.</b> The three value statements all answer \"so what for the client?\" The others are true and worth having in the appendix, but they're reports.",
+  (r, t, w) => `<b>${r} of ${t}${w ? `, plus ${w} report statement${w > 1 ? "s" : ""}` : ""}.</b> Value statements say what the result means for the client's cash, people or decisions. Volumes, SLA results and accuracy figures are reports: useful as evidence, but not the story.`);
+
+/* ---------- 10. Partner ---------- */
+single("#partnerQ", [{ stem: "What should Meridian's COO receive next?", opts: [
+  ["Each tower's explanation, so he can see the full picture", 0, "Three versions of the truth is exactly the problem. He'll conclude nobody is in charge."],
+  ["One message from the named senior owner: what happened end to end, the impact, what's being fixed across all three towers, and when he'll hear next", 2, "Right. One owner, one account of what happened and one plan. The towers sort out the internal detail behind the scenes."],
+  ["An apology from the tower most likely at fault", 1, "Ownership is good, but it still leaves him with a fragmented picture and no single plan across towers."]] }]);
+
+/* ---------- 12. Audit ---------- */
+const AUD = [["Relationship depth: we have strong relationships with the sponsor and economic buyer, not just operational contacts", "Map your top three accounts this month and book one senior conversation for each gap."],
+  ["Leading indicators: we watch engagement, sentiment and effort, not just SLAs", "Add two leading indicators to your monthly account review, such as senior attendance and CES."],
+  ["Voice of client: we act on feedback and tell clients what changed", "Pick one piece of recent client feedback and close the loop: tell the client what changed because of it."],
+  ["Loyalty Ladder: we know where each key account sits and how to move it up", "Place your accounts on the ladder with your managers, and agree one move-up action for each."],
+  ["One accountable partner: clients get one joined-up view across towers and regions", "Name a single senior owner for each key account and set up one shared list of commitments."]];
+AUD.forEach((a, i) => scaleRow($("#audit"), a[0], i, state.audit[i], (idx, v) => { state.audit[idx] = v; save(); auditResult(); }));
+function auditResult() {
+  if (state.audit.some(v => !v)) return;
+  const min = Math.min(...state.audit), low = state.audit.map((v, i) => v === min ? i : -1).filter(i => i >= 0);
+  const avg = (state.audit.reduce((a, b) => a + b, 0) / AUD.length).toFixed(1);
+  const box = $("#auditResult"); box.hidden = false;
+  box.innerHTML = `<h4>Your portfolio average: ${avg} out of 5</h4><p class="small">Your lowest-rated area${low.length > 1 ? "s" : ""}:</p>` +
+    low.map(i => `<p style="margin:6px 0"><b>${AUD[i][0].split(":")[0]}</b><br><span class="small">${AUD[i][1]}</span></p>`).join("") +
+    `<p class="small muted" style="margin:10px 0 0">Carry one of these into your 30-day plan in Section 14.</p>`;
+  if (!$("#sChange").value) { $("#sChange").value = AUD[low[0]][1]; state.fields.sChange = $("#sChange").value; save(); }
+}
+
+/* ---------- 13. Assessment ---------- */
+const KC = [
+  ["All SLAs are green, but the number of client leaders attending reviews has dropped. What's the best reading?", ["A leading indicator of relationship risk worth acting on now", "Nothing to worry about while SLAs are met", "Ask the Account Manager to send meeting reminders", "Wait for the next CSAT result before acting"], "Senior engagement is a leading indicator. SLAs are lagging; by the time they move, the decision may already be made."],
+  ["Your client's long-standing sponsor leaves. What matters most first?", ["Build relationships quickly with their successor and other senior contacts", "Wait for the successor to reach out to you", "Send the successor the latest performance report", "Increase the frequency of operational reporting"], "A sponsor change is one of the biggest risks in any account. Senior leaders move fast to rebuild relationships at that level."],
+  ["An Advisor-style leader is presenting to a Driver-style COO. What should they do?", ["Lead with the headline and the decision, and keep the detail ready for questions", "Walk through all the data so nothing is missed", "Open with personal conversation to build rapport", "Focus mainly on the long-term vision"], "Drivers want the bottom line and the next step. The Advisor's detail is still valuable, as backup."],
+  ["Which QBR statement best uses IMPACT?", ["\"Claims leave two days sooner, bringing your cash forward ahead of fiscal year-end.\"", "\"Charge lag is 2.1 days against a 3-day target.\"", "\"We processed 14,200 transactions this quarter.\"", "\"All SLAs were met.\""], "It maps an operational result to a business outcome, in the client's language and linked to their goals."],
+  ["Before renewal, a client asks for out-of-scope work at no cost. What's the strongest response?", ["Cost it transparently and offer options, agreed with your commercial lead", "Agree, to protect the renewal", "Decline, citing the contract", "Agree, and move staff from another client's tower"], "It takes the client's need seriously while making the trade-offs visible and protecting other clients."],
+  ["A recurring error is within SLA and the client hasn't noticed. What should you do?", ["Fix it and tell the client proactively, with the root cause and prevention plan", "Nothing, because it's within SLA", "Fix it quietly", "Wait for the client to raise it"], "Raising it first (PREP) turns a hidden risk into evidence of transparency."],
+  ["One of your managers handled an angry client call well. Which coaching question best reinforces CX360?", ["\"Walk me through how you used CALM. What did you lead with?\"", "\"Why did the client get so angry?\"", "\"Did you think about escalating it to me?\"", "\"Was the SLA met in the end?\""], "Asking about the framework by name reinforces the shared language and helps the manager repeat what worked."],
+  ["Three towers have each emailed a client with different explanations of the same issue. What should happen next?", ["One senior owner sends a single end-to-end explanation and plan", "Let each tower continue updating the client directly", "The tower most at fault apologises separately", "Wait until the client asks for a joint call"], "Clients need to experience one accountable partner, with one view and one plan."]
+];
+let kcS;
+function renderKC() {
+  kcS = { r: 0, d: 0 };
+  const qs = KC.map(q => { const o = shuffle(q[1].slice()); return { stem: q[0], opts: o, ans: o.indexOf(q[1][0]), exp: q[2] }; });
+  $("#kcScore").className = "fb info";
+  $("#kc").innerHTML = qs.map((q, i) => `<div class="q panel"><div class="counter">Question ${i + 1} of ${qs.length}</div><div class="stem">${q.stem}</div>
+    <div class="opts">${q.opts.map((o, j) => `<button class="opt" data-q="${i}" data-j="${j}">${o}</button>`).join("")}</div><div class="fb" id="kfb${i}" aria-live="polite"></div></div>`).join("");
+  $$("#kc .opt").forEach(b => b.addEventListener("click", () => {
+    const i = +b.dataset.q, q = qs[i], fb = $("#kfb" + i); if (fb.classList.contains("show")) return;
+    const ok = +b.dataset.j === q.ans; kcS.d++; if (ok) kcS.r++;
+    b.classList.add(ok ? "correct" : "wrong"); $$(`#kc [data-q="${i}"]`)[q.ans].classList.add("correct");
+    fb.className = "fb show " + (ok ? "good" : "bad"); fb.innerHTML = `<b>${ok ? "Correct." : "Not quite."}</b> ${q.exp}`;
+    if (kcS.d === qs.length) {
+      const pass = kcS.r >= 7; if (pass) { state.kcPassed = true; save(); }
+      const s = $("#kcScore"); s.className = "fb show " + (pass ? "good" : "info");
+      s.innerHTML = `<div class="pass">${kcS.r} out of ${qs.length}: ${pass ? "Passed" : "Not yet passed"}</div><p style="margin:6px 0">${pass ? "Well done." : "The pass mark is 7. Review the feedback, revisit those sections, then try again."}</p><button class="btn ghost" id="kcRetake">Retake</button>`;
+      $("#kcRetake").addEventListener("click", () => { renderKC(); window.scrollTo({ top: $("#kc").offsetTop - 20 }); });
+    }
+  }));
+}
+renderKC();
+
+/* ---------- Saved fields ---------- */
+$$("[data-save]").forEach(el => el.addEventListener("input", () => {
+  state.fields[el.id] = el.value; save();
+  if (el.id === "pulseAcct" && !$("#sAcct").dataset.touched) { $("#sAcct").value = el.value; state.fields.sAcct = el.value; save(); }
+  if (el.id === "sAcct") el.dataset.touched = "1";
+}));
+
+/* ---------- Print + finish ---------- */
+function printOnly(cls) { document.body.classList.add(cls); window.print(); }
+window.addEventListener("afterprint", () => document.body.classList.remove("p-plan", "p-tools"));
+$("#printPlan").addEventListener("click", () => printOnly("p-plan"));
+$("#printTools").addEventListener("click", () => printOnly("p-tools"));
+$("#finishBtn").addEventListener("click", () => {
+  complete(mods.length - 1);
+  const m = $("#finishMsg"); m.classList.add("show");
+  m.innerHTML = `<b>Course complete${state.done.length === mods.length ? "" : ", though some sections are still unvisited"}.</b> ${state.kcPassed ? "You passed the final assessment." : "Remember to complete the final assessment (pass mark 7 out of 8)."} Print or save your account strategy and toolkit, and share your strategy with your leadership team.`;
+});
+
+/* ---------- Restore ---------- */
+function restore(s) {
+  Object.assign(state, s, { fields: s.fields || {}, adrv: s.adrv || Array(12).fill(null), audit: s.audit || Array(5).fill(0), done: s.done || [] });
+  Object.entries(state.fields).forEach(([id, v]) => { const el = document.getElementById(id); if (el) el.value = v; });
+  if (state.pulse) $$("#pulse button").forEach(b => b.setAttribute("aria-pressed", +b.dataset.v === state.pulse));
+  $$("#audit .scale").forEach((row, i) => $$("button", row).forEach(b => b.setAttribute("aria-pressed", +b.dataset.v === state.audit[i])));
+  auditResult();
+  const answered = state.adrv.filter(Boolean).length;
+  if (answered === ADRV.length) showProfile(); else { pIdx = Math.min(answered, ADRV.length - 1); renderProfile(); }
+  paintFlex(); paintProgress();
+}
+renderProfile(); paintProgress();
+const saved = store.get();
+if (saved && (saved.cur > 0 || (saved.done && saved.done.length))) {
+  const box = $("#resumeBox"); box.classList.add("show");
+  $("#resumeText").textContent = `You've completed ${saved.done.length} of ${mods.length} sections. You were last on "${mods[saved.cur] ? mods[saved.cur].dataset.title : "the course"}".`;
+  restore(saved);
+  $("#resumeBtn").addEventListener("click", () => { box.classList.remove("show"); show(saved.cur); });
+  $("#restartBtn").addEventListener("click", () => { store.clear(); location.reload(); });
+}
+show(0, true);
+
+</script></body></html>
